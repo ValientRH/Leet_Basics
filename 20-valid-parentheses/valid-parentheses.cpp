@@ -2,25 +2,26 @@
 class Solution {
 public:
     bool isValid(std::string s) {
-        std::stack<char> stack;
-        std::unordered_map<char, char> map;
-        map[')'] = '(';
-        map['}'] = '{';
-        map[']'] = '[';
-
-        for (char c : s) {
-            if (map.count(c) == 0) {
-                // It's an opening bracket
-                stack.push(c);
-            } else {
-                // It's a closing bracket
-                if (stack.empty() || stack.top() != map[c]) {
-                    return false; // Mismatched or extra closing bracket
-                }
-                stack.pop(); // Valid match found
+        
+        stack<char> stack1;
+        
+        int i = 0;
+        for(char c :s){
+            if( c=='(' or c=='{' or c =='[' ){
+                stack1.push(c);
             }
+            else{
+                if(stack1.empty() or 
+                (c == ')' && stack1.top() != '(') || 
+                    (c == '}' && stack1.top() != '{') ||
+                    (c == ']' && stack1.top() != '['))
+                    {   return false;   }
+                    stack1.pop();
+            }
+            
         }
+        return stack1.empty();
 
-        return stack.empty(); // Return true if all opening brackets are matched
-    }
+        }
+         
 };
