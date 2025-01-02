@@ -19,20 +19,15 @@ public:
         return -1;
     }
     int searchInsert(vector<int>& nums, int target) {
-       int k =0 ;
-        for(int i =0;i<nums.size();i++){
-            if (nums[i]==target){
-                k=i;
-                break;
-            }
-            else if(nums[i]>target){
-               return i;
-                
-            }
-            else{
-                k=nums.size();
+        int index = binary(nums,target);
+        if(index != -1){
+            return index;
+        }
+        for(int  i= 0; i<nums.size();i++){
+            if(target<nums[i]){
+                return i;
             }
         }
-        return k;
+        return nums.size();
     }
 };
